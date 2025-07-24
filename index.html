@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Herbal Remedies</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 1rem;
+    }
+    .search {
+      margin-bottom: 1rem;
+    }
+    .herb {
+      border: 1px solid #ccc;
+      padding: 1rem;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+    img {
+      max-width: 100px;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <h1>Herbal Remedies</h1>
+  <input class="search" type="text" placeholder="Search herbs..." oninput="searchHerbs(this.value)">
+  <div id="herb-list"></div>
+
+  <script>
+    const herbs = [{'name': 'Aloe Vera', 'uses': 'Soothes burns, aids digestion', 'instructions': 'Apply gel topically or drink juice (1 tbsp daily)', 'image': 'aloe-vera.jpg'}, {'name': 'Ginger', 'uses': 'Reduces nausea, anti-inflammatory', 'instructions': 'Use in tea or 1g powder daily', 'image': 'ginger.jpg'}, {'name': 'Turmeric', 'uses': 'Anti-inflammatory, boosts immunity', 'instructions': 'Take 500mg supplement or 1 tsp in food', 'image': 'turmeric.jpg'}, {'name': 'Chamomile', 'uses': 'Calms anxiety, helps sleep', 'instructions': 'Drink as tea (1 cup before bed)', 'image': 'chamomile.jpg'}, {'name': 'Echinacea', 'uses': 'Boosts immune system', 'instructions': 'Take 300mg capsule 2x daily', 'image': 'echinacea.jpg'}];
+
+    function renderHerbs(filteredHerbs) {
+      const list = document.getElementById('herb-list');
+      list.innerHTML = '';
+      filteredHerbs.forEach(herb => {
+        list.innerHTML += `
+          <div class="herb">
+            <h2>${herb.name}</h2>
+            <img src="images/${herb.image}" alt="${herb.name}">
+            <p><strong>Uses:</strong> ${herb.uses}</p>
+            <p><strong>Instructions:</strong> ${herb.instructions}</p>
+          </div>
+        `;
+      });
+    }
+
+    function searchHerbs(query) {
+      const filtered = herbs.filter(h => h.name.toLowerCase().includes(query.toLowerCase()));
+      renderHerbs(filtered);
+    }
+
+    renderHerbs(herbs);
+  </script>
+</body>
+</html>
